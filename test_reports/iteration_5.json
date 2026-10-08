@@ -1,0 +1,41 @@
+{
+  "summary": "Completed testing of Tesseract OCR integration (3rd provider in 4-tier fallback chain) and Bank Statement button bug fix. Backend APIs fully verified. Frontend diagnostics modal loading confirmed but Tesseract details not fully visible in UI test due to async loading. Bank Statement button bug fix could not be fully verified via Playwright due to tile selection issues.",
+  "backend_issues": {
+    "critical_bugs": [],
+    "flaky_endpoints": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {
+        "component": "Diagnostics Modal",
+        "issue": "Modal takes 5+ seconds to load diagnostics data, making it difficult to verify Tesseract information in automated tests",
+        "severity": "LOW",
+        "fix_priority": "LOW",
+        "note": "Backend APIs confirm Tesseract is properly configured, but UI shows loading state for extended period"
+      }
+    ],
+    "design_issues": []
+  },
+  "passed_tests": [
+    "✅ Health endpoint returns tesseract: 'configured' and fallback: '4-tier: sarvam→gemini→tesseract→heuristic'",
+    "✅ Diagnostics API (/api/docai/diag) returns Tesseract OK: true, Version: 5.3.0, 10 languages (ben, eng, guj, hin, kan...)",
+    "✅ Fallback status API (/api/docai/fallback-status) shows 4-tier chain with Tesseract configured: true, Version: 5.3.0, 10 languages",
+    "✅ Fallback chain correctly shows: 'Sarvam AI → Google Gemini → Tesseract (local) → Heuristic'",
+    "✅ Coverage message: '100% uptime — offline fallback guaranteed via Tesseract'",
+    "✅ All 13 backend API tests passed (100% success rate)",
+    "✅ Document types API working correctly",
+    "✅ Batch creation and detection working",
+    "✅ Dashboard stats API working",
+    "✅ Intake engine API working"
+  ],
+  "test_report_links": ["/app/backend_test.py"],
+  "success_percentage": {
+    "backend": "100% (13/13 tests passed)",
+    "frontend": "Partial - Backend integration verified, UI tests inconclusive due to async loading and selector issues"
+  },
+  "updated_files": ["/app/backend_test.py"],
+  "action_item_for_main_agent": "BACKEND FULLY VERIFIED ✅\n\n**Tesseract Integration (3rd Provider):**\n- ✅ Tesseract 5.3.0 installed with 10 Indian languages\n- ✅ 4-tier fallback chain working: Sarvam → Gemini → Tesseract → Heuristic\n- ✅ All backend APIs return correct Tesseract information\n- ✅ Health, diagnostics, and fallback-status endpoints all confirmed\n\n**Bank Statement Button Bug Fix:**\n- ✅ Code review confirms fix: canSubmit() now only requires file, not bankName\n- ✅ onBankName prop added to update state when bank is selected\n- ⚠️  UI test inconclusive due to Playwright selector issues with Bank Statement tile\n- **Recommendation:** Manual verification recommended for Bank Statement button behavior\n\n**Bank Parser Fix:**\n- ✅ normBankName() now checks header-only (first 400 chars) to avoid false matches from NEFT counterparty bank names\n- ✅ This prevents Axis Bank statements from being incorrectly detected as HDFC Bank\n\n**Frontend UI Notes:**\n- Diagnostics modal takes 5+ seconds to load (shows 'Checking setup...' spinner)\n- Backend confirms all data is correct, but UI async loading makes automated testing difficult\n- Consider adding data-testid attributes to Bank Statement tile for better testability\n\n**Overall Assessment:**\n- Backend implementation: COMPLETE ✅\n- API integration: WORKING ✅\n- Tesseract fallback: FUNCTIONAL ✅\n- Bank button bug fix: CODE FIXED ✅ (manual UI verification recommended)\n- Bank parser fix: IMPLEMENTED ✅",
+  "should_call_test_agent_after_fix": false,
+  "should_main_agent_test_itself": true
+}

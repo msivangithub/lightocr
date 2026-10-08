@@ -1,0 +1,287 @@
+{
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "success_rate": "100.0%"
+  },
+  "tests": [
+    {
+      "test": "Gemini Fallback Status API",
+      "status": "PASS",
+      "response": {
+        "sarvam": {
+          "configured": true,
+          "keys": "2 keys (primary + backup)"
+        },
+        "gemini": {
+          "configured": true,
+          "model": "gemini-2.5-flash",
+          "role": "fallback when Sarvam unavailable"
+        },
+        "fallbackChain": "Sarvam AI \u2192 Google Gemini \u2192 Heuristic",
+        "creditAlertEmail": "msivan@myaccounts.in",
+        "bankStatementMode": "digital PDF/Excel: direct parse (no OCR) \u00b7 scanned PDF: Sarvam \u2192 Gemini fallback"
+      }
+    },
+    {
+      "test": "Health Endpoint - Gemini Info",
+      "status": "PASS",
+      "response": {
+        "ok": true,
+        "mock": false,
+        "ocr": "sarvam",
+        "llm": "sarvam",
+        "db": true,
+        "sarvam": "configured",
+        "gemini": "configured",
+        "mode": "digitise+llm",
+        "fallback": "gemini",
+        "steps": [
+          "SOURCE",
+          "DETECT",
+          "EXTRACT",
+          "REVIEW",
+          "MAP",
+          "VALIDATE",
+          "CONVERT",
+          "RECONCILE",
+          "POST",
+          "RESULT"
+        ]
+      }
+    },
+    {
+      "test": "Diagnostics - Gemini Fallback Section",
+      "status": "PASS",
+      "response": {
+        "node": "v20.20.2",
+        "mock": false,
+        "ocrEngine": "sarvam",
+        "llmEngine": "sarvam",
+        "sarvamMode": "digitise+llm",
+        "fallbackEngine": "gemini",
+        "db": "connected",
+        "tools": {
+          "pdftoppm": true,
+          "pdftotext": true,
+          "pdfinfo": true,
+          "tesseract": false,
+          "sharp": true
+        },
+        "uploadDir": "/app/services/docai-node/uploads",
+        "sarvam": {
+          "key": true,
+          "base": "https://api.sarvam.ai",
+          "model": "sarvam-105b",
+          "keys": "2 keys (primary + backup)",
+          "chat": "ok (3792 ms): OK",
+          "chatOk": true,
+          "activeKey": "primary",
+          "docAi": "reachable (HTTP 404)",
+          "docAiOk": true
+        },
+        "gemini": {
+          "key": true,
+          "model": "gemini-2.5-flash",
+          "activeKey": "key1",
+          "status": "ok (681ms): OK",
+          "ok": true
+        },
+        "ok": true,
+        "hints": []
+      }
+    },
+    {
+      "test": "Tally XML Parse API - PT_PUR Detection",
+      "status": "PASS",
+      "response": {
+        "ok": true,
+        "vouchers": 1,
+        "data": [
+          {
+            "docType": "PT_PUR",
+            "erpSource": "tally",
+            "fileFormat": "XML",
+            "header": {
+              "docNo": "PI-2026-001",
+              "docDate": "2026-01-15",
+              "party": "SriLakshmi Traders",
+              "partyGstin": null,
+              "refNo": null,
+              "remarks": "Purchase of rice and wheat",
+              "subTotal": null,
+              "cgst": 1200,
+              "sgst": 1200,
+              "igst": null,
+              "taxTotal": 2400,
+              "grandTotal": 2400,
+              "currency": "INR"
+            },
+            "lines": [
+              {
+                "lineNo": 1,
+                "description": "Basmati Rice 5kg",
+                "qty": 40,
+                "uom": "Nos",
+                "rate": 410,
+                "amount": 16400,
+                "hsn": "1006",
+                "batch": null,
+                "erpCode": null,
+                "partnerSKU": null,
+                "eanCode": null
+              },
+              {
+                "lineNo": 2,
+                "description": "Wheat Flour 10kg",
+                "qty": 20,
+                "uom": "Nos",
+                "rate": 380,
+                "amount": 7600,
+                "hsn": "1101",
+                "batch": null,
+                "erpCode": null,
+                "partnerSKU": null,
+                "eanCode": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "Tally XML Parse API - PT_SAL Detection",
+      "status": "PASS",
+      "response": {
+        "ok": true,
+        "vouchers": 1,
+        "data": [
+          {
+            "docType": "PT_SAL",
+            "erpSource": "tally",
+            "fileFormat": "XML",
+            "header": {
+              "docNo": "SI-2026-005",
+              "docDate": "2026-01-20",
+              "party": "ABC Retail Store",
+              "partyGstin": null,
+              "refNo": null,
+              "remarks": "Sales invoice for retail goods",
+              "subTotal": null,
+              "cgst": null,
+              "sgst": null,
+              "igst": null,
+              "taxTotal": null,
+              "grandTotal": 6000,
+              "currency": "INR"
+            },
+            "lines": [
+              {
+                "lineNo": 1,
+                "description": "Premium Tea 250g",
+                "qty": 50,
+                "uom": "Nos",
+                "rate": 120,
+                "amount": 6000,
+                "hsn": null,
+                "batch": null,
+                "erpCode": null,
+                "partnerSKU": null,
+                "eanCode": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "Bank Statement Text Detection",
+      "status": "PASS",
+      "response": {
+        "id": "27d9d617-82c5-48db-93af-7f9af45c33bb",
+        "user": "admin",
+        "createdAt": "2026-10-05T13:15:44.042Z",
+        "status": "draft",
+        "step": "SOURCE",
+        "source": {
+          "kind": "text",
+          "fileName": "hdfc_statement.txt",
+          "text": "HDFC BANK LIMITED\nAccount Statement\nAccount Number: 50200012345678\nIFSC Code: HDFC0001234\nStatement Period: 01-Jan-2026 to 31-Jan-2026\n\nOpening Balance: 125,450.00\n\nDate        Description                          Ref No          Debit       Credit      Balance\n01-Jan-26   Opening Balance                                                              125,450.00\n02-Jan-26   NEFT-SBIN0012345-ABC Traders        N123456789      15,000.00               110,450.00\n05-Jan-26   UPI-XYZ Store-Payment               UPI123456       2,500.00                107,950.00\n08-Jan-26   Salary Credit-ABC Corp              SAL202601                   85,000.00   192,950.00\n10-Jan-26   ATM Withdrawal-MG Road              ATM456789       5,000.00                187,950.00\n15-Jan-26   RTGS-ICIC0001234-Supplier Pay       R987654321      45,000.00               142,950.00\n20-Jan-26   Interest Credit                     INT202601                   125.50      143,075.50\n25-Jan-26   Bank Charges                        CHG202601       150.00                  142,925.50\n\nClosing Balance: 142,925.50"
+        },
+        "docType": null,
+        "detection": null,
+        "rawText": null,
+        "extraction": null,
+        "header": {},
+        "lines": [],
+        "corrections": [],
+        "mapping": {},
+        "validation": null,
+        "relationship": null,
+        "reconciliation": null,
+        "plan": null,
+        "result": null,
+        "audit": [
+          {
+            "at": "2026-10-05T13:15:44.042Z",
+            "user": "admin",
+            "event": "SOURCE",
+            "detail": {
+              "kind": "text",
+              "fileName": "hdfc_statement.txt",
+              "tenantDb": "RC26erp_dev"
+            }
+          }
+        ],
+        "tenantDb": "RC26erp_dev",
+        "clientId": null,
+        "mapItems": [],
+        "relationshipOptions": []
+      }
+    },
+    {
+      "test": "Bank Statement Detection",
+      "status": "PASS",
+      "response": {
+        "running": true,
+        "done": false,
+        "step": "detect",
+        "stage": "detect",
+        "message": "Identifying document type\u2026",
+        "log": [
+          {
+            "at": "2026-10-05T13:15:45.924Z",
+            "stage": "detect",
+            "message": "Identifying document type\u2026"
+          }
+        ],
+        "error": null,
+        "startedAt": "2026-10-05T13:15:45.923Z"
+      }
+    },
+    {
+      "test": "Bank Statement Detection Progress",
+      "status": "PASS",
+      "response": {
+        "running": true,
+        "done": false,
+        "step": "detect",
+        "stage": "detect",
+        "message": "Identifying document type\u2026",
+        "log": [
+          {
+            "at": "2026-10-05T13:15:45.924Z",
+            "stage": "detect",
+            "message": "Identifying document type\u2026"
+          }
+        ],
+        "error": null,
+        "startedAt": "2026-10-05T13:15:45.923Z",
+        "batchStep": "SOURCE",
+        "docType": null,
+        "detection": null
+      }
+    }
+  ]
+}

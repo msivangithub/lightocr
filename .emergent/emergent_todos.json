@@ -1,0 +1,26 @@
+[
+  {
+    "content": "1. Create lightOcrService.js (tesseract.js WASM Tier 1 + analyzeLayout)",
+    "status": "in_progress"
+  },
+  {
+    "content": "2. Update ocrEngine.js to 5-tier chain with confidence threshold",
+    "status": "pending"
+  },
+  {
+    "content": "3. Update health/diag/fallback-status endpoints",
+    "status": "pending"
+  },
+  {
+    "content": "4. Update DocAIWizard.js: engine badges + OCR failure error card",
+    "status": "pending"
+  },
+  {
+    "content": "5. Update FastAPI startup auto-install + .env OCR_MIN_CONFIDENCE",
+    "status": "pending"
+  },
+  {
+    "content": "6. E2E testing via testing agent",
+    "status": "pending"
+  }
+]

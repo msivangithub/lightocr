@@ -1,0 +1,38 @@
+{
+  "name": "retailcliq-docai-wizard",
+  "version": "1.0.0",
+  "description": "RetailCLIQ Universal AI Document Processing Wizard - Sarvam AI powered import operations",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "mock": "DOCAI_MOCK=1 node server/index.js"
+  },
+  "dependencies": {
+    "@arcships/light-ocr": "^0.5.8",
+    "@arcships/light-ocr-model-ppocrv6-small": "^0.3.4",
+    "@arcships/light-ocr-runtime": "^0.1.8",
+    "adm-zip": "^0.6.1",
+    "axios": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "form-data": "^4.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mssql": "^11.0.1",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.7.0",
+    "node-unrar-js": "^2.0.2",
+    "nodemailer": "^10.0.15",
+    "onnxruntime-node": "^1.30.0",
+    "p-limit": "^3.1.0",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^1.1.1",
+    "sharp": "^0.35.5",
+    "tesseract.js": "^6.0.1",
+    "uuid": "^9.0.1",
+    "xlsx": "^0.18.5"
+  },
+  "license": "UNLICENSED",
+  "private": true
+}
